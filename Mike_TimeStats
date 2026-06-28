@@ -1,0 +1,51 @@
+-- Mike TimeStats-Conky  v1.0.0
+-- Author: MikeDevQH  ·  michaelqhdez@gmail.com
+-- License: GPLv3
+
+conky.config = {
+    use_xft = true,
+    font = '123:size=8',
+    xftalpha = 0.1,
+    update_interval = 1,
+    total_run_times = 0,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_colour = '000000',
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+
+    double_buffer = true,
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = false,
+    draw_graph_borders = false,
+    default_color = 'white',
+
+    alignment = 'top_middle',
+    gap_x = 50,
+    gap_y = 80,
+
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    net_avg_samples = 1,
+    override_utf8_locale = true,
+    use_spacer = 'yes',
+
+    minimum_width = 600,
+    minimum_height = 300,
+}
+
+conky.text = [[
+${alignc}__ACCENT_COLOR__${font Anurati:size=65}${execi 3600 LC_ALL=__LOCALE__ date +%A | tr '[:lower:]' '[:upper:]'}${font}${color}
+${voffset 30}${goto 80}${font Nasalization:pixelsize=95}${time %-I:%M}${font}${color}${voffset -10}__ACCENT_COLOR__${font Nasalization:pixelsize=30}${execi 3600 LC_ALL=__LOCALE__ date +%p}${font}${color}
+${goto 300}${voffset -80}${font Nasalization:pixelsize=55}${time %d}${font}${color}${voffset -30}__ACCENT_COLOR__${font Anurati:size=28} ${execi 3600 LC_ALL=__LOCALE__ date +%b | tr '[:lower:]' '[:upper:]'}${font}${color}${voffset -25}${font Nasalization:pixelsize=40} ${time %Y}${font}
+${voffset 90}${goto 220}__ACCENT_COLOR__${font Weather Icons:pixelsize=26}${font Nasalization:pixelsize=30} ${execi 1800 curl -s --connect-timeout 10 "https://wttr.in/?__UNIT_MODE__&lang=__LANG_CODE__&format=%t" | sed 's/+//;s/°.//'}${font Weather Icons:pixelsize=26}__UNIT_ICON__${font}${color}
+${voffset -50}${goto 300}${font Nasalization:pixelsize=20}${execi 1800 curl -s --connect-timeout 10 "https://wttr.in/?__UNIT_MODE__&lang=__LANG_CODE__&format=%l" | sed 's/,.*//'}${font}
+${voffset 0}${goto 300}${font Nasalization:pixelsize=18}${execi 1800 curl -s --connect-timeout 10 "https://wttr.in/?__UNIT_MODE__&lang=__LANG_CODE__&format=%C"}${font}
+${voffset 0}${goto 300}${font Nasalization:pixelsize=18}__LBL_FEELS__ ${execi 1800 curl -s --connect-timeout 10 "https://wttr.in/?__UNIT_MODE__&lang=__LANG_CODE__&format=%f" | sed 's/+//;s/°.//'}${font Weather Icons:pixelsize=18}__UNIT_ICON__${font}
+${voffset 0}${goto 300}${font Nasalization:pixelsize=18}__LBL_HUM__ ${execi 1800 curl -s --connect-timeout 10 "https://wttr.in/?__UNIT_MODE__&lang=__LANG_CODE__&format=%h" | sed 's/%//'} ${font Weather Icons:pixelsize=14}${font}
+]]
